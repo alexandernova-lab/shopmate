@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { User } from "../models/user.js";
+import { generateToken } from "../utils/generateToken.js";
 
 export const register = async (req, res) => {
   try {
@@ -56,4 +57,43 @@ export const register = async (req, res) => {
       message: "Internal Server Error",
     });
   }
+};
+
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const existingUser = await User.findOne({ email });
+
+    if (!existingUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Password match
+    const isMatch = await bcrypt.compare(password, existingUser.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // Create Token and set Cookie
+    const token = generateToken(existingUser.id);
+    res.cookie("token", token, {
+      httpOnly: true,
+      maxAge: 3 * 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({ message: "Login Success" });
+  } catch (error) {
+    console.error("Login error:", error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const logout = async (req, res) => {
+  res.cookie("token", "", { maxAge: 1 });
+  return res.status(200).json({ message: "Logout success" });
 };
