@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./db/connectDB.js";
+import userRoutes from "./routes/user.js";
 
 dotenv.config({
   path: ".env",
@@ -13,6 +14,9 @@ app.use(express.json());
 
 // Configuration
 const PORT = process.env.PORT || 3000;
+
+// Routes
+app.use("/api/user/", userRoutes);
 
 // Start Server
 const startServer = async () => {
