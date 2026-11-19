@@ -2,6 +2,7 @@ import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import express from "express";
 import { connectDB } from "./db/connectDB.js";
+import categoryRoutes from "./routes/category.js";
 import userRoutes from "./routes/user.js";
 
 dotenv.config({
@@ -19,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 // Routes
 app.use("/api/user/", userRoutes);
+app.use("/api/category/", categoryRoutes);
 
 // Start Server
 const startServer = async () => {
@@ -28,5 +30,7 @@ const startServer = async () => {
     console.log(`Server is running on port ${PORT}`);
   });
 };
+
+
 
 startServer();
