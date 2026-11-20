@@ -70,7 +70,7 @@ export const updateCategory = async (req, res) => {
         slug,
         description,
       },
-      { returnDocument: after, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
 
     if (!category) {

@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 
-const productSchema = Schema(
+const productSchema = new Schema(
   {
     name: {
       type: String,
@@ -33,8 +33,14 @@ const productSchema = Schema(
     },
     images: [
       {
-        type: String,
-        trim: true,
+        image_url: {
+          type: String,
+          required: true,
+        },
+        public_id: {
+          type: String,
+          required: true,
+        },
       },
     ],
     category: {
