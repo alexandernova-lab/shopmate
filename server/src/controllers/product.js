@@ -231,7 +231,7 @@ export const deleteProduct = async (req, res) => {
 
     // Delete all images from Cloudinary
     const results = await Promise.allSettled(
-      publicIds.map((publci_id) => deleteImage(publci_id)),
+      publicIds.map((public_id) => deleteImage(publci_id)),
     );
 
     // Check whether any image deletion failed
