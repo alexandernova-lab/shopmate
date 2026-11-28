@@ -1,1 +1,23 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
+
+@theme {
+  --color-bg: #101114; /* page background */
+  --color-surface: #1c1d22; /* cards, modals, navbar */
+  --color-border: #303136;
+  --color-accent: #3b82f6; /* primary buttons, focus */
+  --color-accent-hover: #60a5fa;
+  --color-link: #60a5fa; /* links on dark surfaces */
+  --color-on-accent: #101114; /* text on accent buttons */
+  --color-text: #ffffff;
+  --color-muted: #a1a1aa; /* secondary text */
+  --color-danger: #f87171;
+  --color-success: #4ade80;
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --radius-base: 10px;
+}
+
+body {
+  @apply bg-bg text-text font-sans;
+}

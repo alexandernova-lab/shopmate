@@ -1,5 +1,6 @@
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
+import cors from "cors";
 import express from "express";
 import { connectDB } from "./db/connectDB.js";
 import categoryRoutes from "./routes/category.js";
@@ -17,6 +18,13 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+
+app.use(
+  cors({
+    origin: process.env.VITE_LOCAL_API_URL,
+    credentials: true,
+  }),
+);
 
 // Configuration
 const PORT = process.env.PORT || 3000;
